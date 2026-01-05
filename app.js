@@ -6,8 +6,12 @@ const library = [];
 function Book(title, id){
     this.title = title;
     this.id = id;
+    this.read = false;
 }
 
+Book.prototype.read = function(){
+    this.read = !this.read
+}
 function addToLibrary(book){
     library.push(book);
 }
@@ -34,12 +38,18 @@ function displayBooks(library){
         const newID = document.createElement('td');
         newID.textContent = book.id;
 
+        const newRemove = document.createElement('button');
+        newRemove.textContent = "Remove";
+        newRemove.setAttribute("data-index-number", book.id);
+        newRemove.setAttribute("class", "deleteButton")
+
         const newTBody = document.querySelector('tBody');
 
 
 
         newRow.appendChild(newTitle);
         newRow.appendChild(newID);
+        newRow.appendChild(newRemove);
         newTBody.appendChild(newRow);
 
         const table = document.querySelector("table");
@@ -47,21 +57,38 @@ function displayBooks(library){
     });
 }
 
-const button = document.querySelector(".newButton");
-button.addEventListener("click", ()=>{
+const addButton = document.querySelector(".newButton");
+addButton.addEventListener("click", ()=>{
     let inputTitle  = prompt("Name of book");
-    book = new Book(inputTitle, crypto.randomUUID());
-    addToLibrary(book);
-    displayBooks(library);
+    if (inputTitle != null){
+        book = new Book(inputTitle, crypto.randomUUID());
+        addToLibrary(book);
+        displayBooks(library);
+    }
 });
 
-// book1 = new Book("Price of Peace", crypto.randomUUID());
-// book2 = new Book("Investing in the US", crypto.randomUUID());
-// book3 = new Book("Red Rising ", crypto.randomUUID());
+// const deleteButton = document.querySelector(".deleteButton");
+const tBody = document.querySelector("tbody");
+tBody.addEventListener("click", (e)=>{
+    if (e.target.classList.contains("deleteButton")){
+        
+        const id = e.target.getAttribute("data-index-number");
+        for (let i = 0; i < library.length;++i){
+            if (library[i].id == id){
+                library.splice(i, 1);
+            } 
+        }
+        displayBooks(library);
+    }
+});
 
-// addToLibrary(book1);
-// addToLibrary(book2);
-// addToLibrary(book3);
+book1 = new Book("Price of Peace", crypto.randomUUID());
+book2 = new Book("Investing in the US", crypto.randomUUID());
+book3 = new Book("Red Rising ", crypto.randomUUID());
+
+addToLibrary(book1);
+addToLibrary(book2);
+addToLibrary(book3);
 
 displayBooks(library);
 
