@@ -1,3 +1,9 @@
-table, td, tr{
-    border: black solid
+body{
+    display:flex;
+    justify-content:space-between;
 }
+
+table, td, tr{
+    border: black solid;
+}
+

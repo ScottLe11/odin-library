@@ -13,7 +13,8 @@
                 <tr>
                     <td>Title</td>
                     <td>ID</td>
-                    
+                    <td>Author</td>
+                    <td>#of Pages</td>
                 </tr>
             </thead>
 
@@ -28,9 +29,20 @@
         </table>
     </div>
 
-    <button class = "newButton">
-        <p>New Book</p>
-    </button>
+    <form class = "form" method="POST">
+        <label for="bookTitle">Title:</label><br>
+        <input type="text" name="bookTitle" required><br>
+        
+        <label for="bookAuthor">Author:</label><br>
+        <input type="text" name="bookAuthor" required><br>
+        
+        <label for="bookPages">Num of pages:</label><br>
+        <input type="number" name="bookPages" required><br>
+
+        <button type="submit" class = "newButton">
+            <p>New Book</p>
+        </button>
+    </form>
 
     <!-- <div class = "delete">
         <button class = "deleteButton">Delete Entry</button>
