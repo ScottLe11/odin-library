@@ -77,7 +77,30 @@ function displayBooks(library){
 //     }
 // });
 
+
 const myForm = document.querySelector(".form");
+const pagesInput = myForm.querySelector('#bookPages')
+const pagesError = pagesInput.nextElementSibling;
+
+function isPageValid(){
+    if (pagesInput.validity.valueMissing){
+        pagesError.textContent = "No value given";
+    }
+
+    else if (pagesInput.validity.rangeUnderflow){
+        pagesError.textContent = "A book must have at least 1 page.";
+    }
+    else{
+        pagesError.textContent = "";
+        pagesError.classList.remove("input-error");
+        return true;
+    }
+    pagesError.classList.add("input-error");
+    return false;
+};
+
+
+
 myForm.addEventListener("submit", (e)=>{
     e.preventDefault();
 
@@ -85,6 +108,10 @@ myForm.addEventListener("submit", (e)=>{
     const title = formData.get('bookTitle');
     const author = formData.get('bookAuthor');
     const pages = formData.get('bookPages');
+
+    if (!isPageValid()){
+        return;
+    }
     book = new Book(title, crypto.randomUUID(), author, pages);
     addToLibrary(book);
     displayBooks(library);

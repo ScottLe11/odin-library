@@ -29,7 +29,7 @@
         </table>
     </div>
 
-    <form class = "form" method="POST">
+    <form class = "form" method="POST" novalidate>
         <label for="bookTitle">Title:</label><br>
         <input type="text" name="bookTitle" required><br>
         
@@ -37,8 +37,9 @@
         <input type="text" name="bookAuthor" required><br>
         
         <label for="bookPages">Num of pages:</label><br>
-        <input type="number" name="bookPages" required><br>
+        <input type="number" id="bookPages" name="bookPages" min="1" max="10000" required>
 
+        <span class="error-message" aria-live="polite"></span>
         <button type="submit" class = "newButton">
             <p>New Book</p>
         </button>

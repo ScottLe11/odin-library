@@ -7,3 +7,15 @@ table, td, tr{
     border: black solid;
 }
 
+
+.error-message {
+    color: #ff4d4d;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: block;
+    min-height: 1em; /* Prevents layout jump when text appears */
+}
+
+.input-error {
+    border: 2px solid #ff4d4d;
+}
